@@ -3,9 +3,8 @@ def input_error(func):
         try:
             return func(*user)
         except IndexError:
-            return "Not enough params"
+            return "Give me name and phone please" 
     return inner
-
 
 dict_phone = {}
 
@@ -16,18 +15,20 @@ def main(*user):
     elif user[0] == 'change':
         dict_phone[user[1]] = user[2]
     elif user[0] == 'phone':
-        print(dict_phone.get(user[1]))
+        if user[1] in dict_phone:
+            return dict_phone.get(user[1])
+        else:
+            return 'Not user'
     elif user[0] == 'hello':
-        print('"How can I help you?')
+        return '"How can I help you?'
     elif user[0] == 'show' and user[1] == 'all':
-        print(dict_phone)
+        return dict_phone
     else:
-        print('Not enough param')
+        return "There is no such request"
     
-
 while True:
-    input_user = input('>>>')
+    input_user = input('>>>').lower()
     if input_user == 'exit':
         print('Good bye')
         break
-    main(*input_user.split())
+    print(main(*input_user.split()))
