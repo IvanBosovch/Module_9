@@ -10,27 +10,30 @@ def input_error(func):
 
 dict_phone = {}
 
+@input_error
 def add_func(*user):
     dict_phone.setdefault(user[1], user[2])
     return f'Add {user[1]} and phone {user[2]}'
 
+@input_error
 def change_func(*user):
     if user[1] not in dict_phone:
         raise KeyError
     dict_phone[user[1]] = user[2]
     return f'Change phone {user[1]}'
 
+@input_error
 def phone_func(*user):
-    phone = dict_phone.get(user[1])
-    return f'Phone user: {phone}'
+    return dict_phone[user]
 
 def hello_func(*user):
     return 'How can I help you?'
 
-def show_all_func(*user):
-    return dict_phone
-
 @input_error
+def show_all_func(*user):
+    return f'All dict {dict_phone}'
+
+
 def main(*user):
     if user[0] == 'add':
         return add_func(*user)
