@@ -1,5 +1,3 @@
-
-
 def input_error(f):
     def inner(*args):
         try:
@@ -12,7 +10,9 @@ def input_error(f):
             return 'There is no such request'
     return inner
 
+
 records = {}
+
 
 @input_error
 def add_record(*args):
@@ -20,6 +20,7 @@ def add_record(*args):
     rec_value = args[1]
     records[rec_id] = rec_value
     return f'Add {rec_id = }, {rec_value = }'
+
 
 @input_error
 def change_record(*args):
@@ -30,6 +31,7 @@ def change_record(*args):
         records[rec_id] = new_value
         return f'Change {rec_id = }, {new_value = }'
 
+
 @input_error
 def phone_record(*args):
     rec_id = args[0]
@@ -37,8 +39,10 @@ def phone_record(*args):
         raise KeyError
     return f'Phone: {records.get(rec_id)}'
 
+
 def hello_func(*args):
     return 'How can I help you?'
+
 
 @input_error
 def show_all_func(*args):
@@ -47,8 +51,10 @@ def show_all_func(*args):
         string += f'{k} : {v}\n'
     return string
 
+
 def unknown(*args):
     return 'Unknown command. Try again'
+
 
 COMMANDS = {add_record: 'add',
             change_record: 'change',
@@ -72,6 +78,7 @@ def main():
             break
         func, data = parser(user_input)
         print(func(*data))
+
 
 if __name__ == '__main__':
     main()
